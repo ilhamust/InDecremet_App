@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'InDecrement App'),
@@ -38,6 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter() {
+    setState(() {
+      _counter = (_counter > 0) ? _counter - 1 : _counter;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
+              style: TextStyle(fontSize: 25),
               'Number :',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -66,8 +69,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Icon(Icons.add),
                 ),
                 const SizedBox(width: 10,),
+                Container(
+                  height: 55,
+                  width: 55,
+                  decoration: BoxDecoration(color: Colors.blue[100], borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: Text(
+                      '$_counter',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10,),
                 FloatingActionButton(
-                  onPressed: _incrementCounter,
+                  onPressed: _decrementCounter,
                   tooltip: 'Decrement',
                   child: const Icon(Icons.minimize_outlined),
                 ),
